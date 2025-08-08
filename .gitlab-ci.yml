@@ -1,0 +1,41 @@
+image: docker:latest
+
+stages:
+  - build
+  - run
+
+variables:
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_DRIVER: overlay2
+  IMAGE_NAME: liberandum-api
+
+before_script:
+  - docker info
+
+build:
+  stage: build
+  tags:
+    - release
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "main"
+  script:
+    - echo "Building Docker image..."
+    - docker system prune -f
+    - docker build -t $IMAGE_NAME .
+
+run:
+  stage: run
+  tags:
+    - release
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "main"
+  script:
+    - echo "🧹 Stopping old container (if exists)..."
+    - docker stop $IMAGE_NAME || true
+    - docker rm $IMAGE_NAME || true
+    - echo "🚀 Running new container..."
+    - docker run -d --rm --name $IMAGE_NAME -p 50001:8000 $IMAGE_NAME
+    - echo "⏳ Waiting for app to start..."
+    - sleep 5
+    - docker ps
+    - docker logs $IMAGE_NAME
