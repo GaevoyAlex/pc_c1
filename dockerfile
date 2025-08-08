@@ -15,10 +15,11 @@ COPY pyproject.toml poetry.lock* ./
 RUN poetry config virtualenvs.create false && \
     poetry install --no-interaction --no-ansi
 
-RUN pip install pydantic-settings dynaconf
+RUN pip install playwright>=1.40.0
+
+RUN playwright install chromium
+RUN playwright install-deps
 
 COPY . .
-
-RUN mkdir -p /app/logs
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

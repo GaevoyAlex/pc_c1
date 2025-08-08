@@ -26,6 +26,7 @@ boto3 = "^1.38.46"
 bcrypt = "^4.3.0"
 websockets = "^15.0.1"
 dynaconf = "^3.2.11"
+playwright = "^1.54.0"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
