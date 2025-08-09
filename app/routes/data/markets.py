@@ -7,7 +7,7 @@ from app.routes.data.market_global import router as global_market_router
 
 router = APIRouter()
 
-router.include_router(tokens_router, prefix="/tokens", tags=["Tokens"])
-router.include_router(exchanges_router, prefix="/exchanges", tags=["Exchanges"])
+router.include_router(tokens_router, prefix="/tokens",)
+router.include_router(exchanges_router, prefix="/exchanges", )
 router.include_router(websocket_router, tags=["WebSocket"])
-router.include_router(global_market_router, tags=["Global Market"])
+router.include_router(global_market_router)

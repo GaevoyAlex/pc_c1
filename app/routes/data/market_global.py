@@ -29,11 +29,11 @@ async def get_global_market_data():
         )
     
 
-@router.get("/alt-season")
-async def debug_alt_season():
-    cmc_result = await MarketGlobalsService.get_alt_season_index
+# @router.get("/alt-season")
+# async def debug_alt_season():
+#     cmc_result = await MarketGlobalsService.get_alt_season_index
     
-    return {
-        "coinmarketcap_result": cmc_result,
-        "debug_info": "Check server logs for detailed HTML debugging output"
-    }
+#     return {
+#         "coinmarketcap_result": cmc_result,
+#         "debug_info": "Check server logs for detailed HTML debugging output"
+#     }
